@@ -2,7 +2,15 @@ from naoqi import ALProxy
 import time
 
 
-def getBehaviors():
+def no_sync():
+    behavior_mng_service = ALProxy("ALBehaviorManager", "192.168.0.100", 9559)
+
+    getBehaviors(behavior_mng_service)
+    launchAndStopBehavior(behavior_mng_service, "single-ladies-c4455d/behavior_1")
+    defaultBehaviors(behavior_mng_service, "single-ladies-c4455d/behavior_1")
+
+
+def getBehaviors(behavior_mng_service):
     """
     Know which behaviors are on the robot.
     """
@@ -16,7 +24,7 @@ def getBehaviors():
     print names
 
 
-def launchAndStopBehavior(behavior_name):
+def launchAndStopBehavior(behavior_mng_service, behavior_name):
     """
     Launch and stop a behavior, if possible.
     """
@@ -51,7 +59,7 @@ def launchAndStopBehavior(behavior_name):
     print names
 
 
-def defaultBehaviors(behavior_name):
+def defaultBehaviors(behavior_mng_service, behavior_name):
     """
     Set a behavior as default and remove it from default behavior.
     """
@@ -74,10 +82,3 @@ def defaultBehaviors(behavior_name):
     names = behavior_mng_service.getDefaultBehaviors()
     print "Default behaviors:"
     print names
-
-
-behavior_mng_service = ALProxy("ALBehaviorManager", "192.168.0.100", 9559)
-
-getBehaviors()
-launchAndStopBehavior("single-ladies-c4455d/behavior_1")
-defaultBehaviors("single-ladies-c4455d/behavior_1")
