@@ -2,8 +2,8 @@ from naoqi import ALProxy
 import time
 
 
-def no_sync():
-    behavior_mng_service = ALProxy("ALBehaviorManager", "192.168.0.100", 9559)
+def no_sync(ip):
+    behavior_mng_service = ALProxy("ALBehaviorManager", ip, 9559)
 
     getBehaviors(behavior_mng_service)
     launchAndStopBehavior(behavior_mng_service, "single-ladies-c4455d/behavior_1")

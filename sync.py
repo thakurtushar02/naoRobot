@@ -1,18 +1,12 @@
 import verse1
 import verse2
 import chorus
-import httplib, urllib
-import requests
-from threading import Thread
+
 from naoqi import ALProxy
+from flask import Flask, request, session, jsonify
 
-# IP address of leader robot
-flask_ip = "192.168.0.101:5000"
-flaskWebIP = "http://192.168.0.101:5000"
-
-
-def sync(motion, is_verse1):
-    behavior_mng_service = ALProxy("ALBehaviorManager", "192.168.0.100", 9559)
+def sync(ip, motion, is_verse1):
+    behavior_mng_service = ALProxy("ALBehaviorManager", ip, 9559)
     behavior_mng_service.runBehavior("stand-166579/behavior_1", _async=True)
 
     if is_verse1:
