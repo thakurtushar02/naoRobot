@@ -6,6 +6,9 @@ from naoqi import ALProxy
 ans = raw_input("Sync? [Y/N/stop]: ")
 robot_list = [("192.168.0.100", True), ("192.168.0.104", False)]
 
+for robot in robot_list:
+    behavior_mng_service = ALProxy("ALBehaviorManager", robot[0], 9559)
+    behavior_mng_service.runBehavior("standup-e2d510/behavior_1", _async=True)
 
 if ans == "Y" or ans == "y":
     for robot in robot_list:
