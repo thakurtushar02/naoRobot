@@ -10,6 +10,10 @@ for robot in robot_list:
     behavior_mng_service = ALProxy("ALBehaviorManager", robot[0], 9559)
     behavior_mng_service.runBehavior("standup-e2d510/behavior_1", _async=True)
 
+aup = ALProxy("ALAudioPlayer", robot_list[0][0], 9559)
+thread = Thread(target=aup.playFile, args=["/home/nao/music.mp3"])
+thread.start()
+
 if ans == "Y" or ans == "y":
     for robot in robot_list:
         sync.sync(robot[0], robot[1])
