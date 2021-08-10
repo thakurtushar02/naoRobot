@@ -5,7 +5,9 @@ import chorus
 from naoqi import ALProxy
 from flask import Flask, request, session, jsonify
 
-def sync(ip, motion, is_verse1):
+
+def sync(ip, is_verse1):
+    motion = ALProxy("ALMotion", ip, 9559)
     behavior_mng_service = ALProxy("ALBehaviorManager", ip, 9559)
     behavior_mng_service.runBehavior("stand-166579/behavior_1", _async=True)
 
