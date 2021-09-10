@@ -1,7 +1,3 @@
-import verse1
-import verse2
-import chorus
-
 from naoqi import ALProxy
 
 

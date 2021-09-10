@@ -1,17 +1,17 @@
 from robot import Robot
-import constants
+from constants import DanceVer, SONG_FILE_PATH
 from threading import Thread
 from naoqi import ALProxy
 
 ans = raw_input("Sync? [Y/N/stop]: ")
-robot_list = [Robot("127.0.0.1", 60746, constants.Dance.dance1)]
+robot_list = [Robot("127.0.0.1", 60746, DanceVer.dance1)]
 
 # all robots stand up
 for robot in robot_list:
     robot.stand_up()
 
 # first robot plays song
-# thread = Thread(target=robot_list[0].play_song, args=[constants.SONG_FILE_PATH])
+# thread = Thread(target=robot_list[0].play_song, args=[SONG_FILE_PATH])
 # thread.start()
 
 if ans == "Y" or ans == "y":

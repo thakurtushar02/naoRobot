@@ -1,4 +1,5 @@
 from naoqi import ALProxy
+from constants import DanceVer, dance1Info, dance2Info
 
 
 class Robot:
@@ -26,16 +27,25 @@ class Robot:
     def dance_no_sync(self):
         behavior_name = self.dance_ver
         try:
-            behavior_mng_service = ALProxy("ALBehaviorManager", self.ip, self.port)
+            behaviorMgrProxy = ALProxy("ALBehaviorManager", self.ip, self.port)
             # Check that the behavior exists.
-            if behavior_mng_service.isBehaviorInstalled(behavior_name):
+            if behaviorMgrProxy.isBehaviorInstalled(behavior_name):
                 # Check that it is not already running.
-                if behavior_mng_service.isBehaviorRunning(behavior_name):
-                    behavior_mng_service.stopBehavior(behavior_name)
-                behavior_mng_service.runBehavior(behavior_name, _async=True)
+                if behaviorMgrProxy.isBehaviorRunning(behavior_name):
+                    behaviorMgrProxy.stopBehavior(behavior_name)
+                behaviorMgrProxy.runBehavior(behavior_name, _async=True)
             else:
                 print "Behavior not found."
                 return
         except Exception, e:
             print "Could not create proxy to ALBehaviorManager"
+            print "Error was: ", e
+
+    def dance_sync(self):
+        try:
+            motionProxy = ALProxy("ALMotion", self.ip, self.port)
+            [names, times, keys] = dance1Info() if self.dance_ver == DanceVer.dance1 else dance2Info()
+            motionProxy.angleInterpolationBezier(names, times, keys)
+        except Exception, e:
+            print "Could not create proxy to ALMotion"
             print "Error was: ", e
