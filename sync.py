@@ -3,11 +3,10 @@ import verse2
 import chorus
 
 from naoqi import ALProxy
-from flask import Flask, request, session, jsonify
 
 
 def sync(ip, is_verse1):
-    motion = ALProxy("ALMotion", ip, 9559)
+    motion = ALProxy("ALMotion", ip, 60746)
 
     if is_verse1:
         [names, times, keys] = verse1.verse1()

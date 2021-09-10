@@ -18,9 +18,6 @@ def getBehaviors(ip):
 
 
 def launchBehavior(ip, behavior_name):
-    """
-    Launch and stop a behavior, if possible.
-    """
     behavior_mng_service = ALProxy("ALBehaviorManager", ip, 9559)
 
     # Check that the behavior exists.
