@@ -16,7 +16,8 @@ for robot in robot_list:
 
 if ans == "Y" or ans == "y":
     for robot in robot_list:
-        print("TODO")
+        thread = Thread(target=robot.dance_sync)
+        thread.start()
 elif ans == "N" or ans == "n":
     for robot in robot_list:
         thread = Thread(target=robot.dance_no_sync)
