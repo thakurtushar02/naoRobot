@@ -11,6 +11,7 @@ for robot in robot_list:
     robot.stand_up()
 
 # first robot plays song
+# does not work with virtual robot as there is no file system
 # thread = Thread(target=robot_list[0].play_song, args=[SONG_FILE_PATH])
 # thread.start()
 
